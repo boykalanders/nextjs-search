@@ -1,8 +1,23 @@
+"use client"
+
 import Image from "next/image";
 import { SearchIcon } from '@heroicons/react/outline'
 import { MicrophoneIcon, ViewGridIcon } from '@heroicons/react/solid'
+import { useRouter } from "next/navigation";
+import { useRef } from "react";
 
 export default function Home() {
+  const router = useRouter()
+  const searchInputRef = useRef(null)
+
+  const search = (e) => {
+      e.preventDefault()
+      const term = searchInputRef.current.value
+
+      if (!term) return
+
+      router.push(`/search?term=${term}`)
+  }
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {/* Header */}
@@ -38,7 +53,7 @@ export default function Home() {
           <div className="float-left">
             <Image className="flex space-x-4" src="/360nav.png" alt="google doodle" height={500} width={100} />
           </div>
-          <div className='float-left'><h1 class="font-berkshire text-xxl mt-5 font-semi-bold" >360Nav Browser</h1></div>
+          <div className='float-left'><h1 className="font-berkshire text-xxl mt-5 font-semi-bold" >360Nav Browser</h1></div>
         </div>
 
 
