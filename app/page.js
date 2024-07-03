@@ -1,14 +1,19 @@
 "use client"
-
+import * as React from 'react';
 import Image from "next/image";
 import { SearchIcon } from '@heroicons/react/outline'
 import { MicrophoneIcon, ViewGridIcon } from '@heroicons/react/solid'
 import { useRouter } from "next/navigation";
 import { useRef } from "react";
+import Popover from '@mui/material/Popover';
+import Signin from './signin/page';
+import Signup from './signup/page';
 
 export default function Home() {
   const router = useRouter()
   const searchInputRef = useRef(null)
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const [sign, setsign] = React.useState()
 
   const search = (e) => {
       e.preventDefault()
@@ -18,6 +23,18 @@ export default function Home() {
 
       router.push(`/search?term=${term}`)
   }
+
+  const handlePopupClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {/* Header */}
@@ -43,7 +60,20 @@ export default function Home() {
             src="https://avatars.githubusercontent.com/u/45622345?v=4"
             alt="profile pic"
             title="Click here to go to my GitHub profile"
+            aria-describedby={id} variant="contained" onClick={handlePopupClick}
           />
+          <Popover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+          >
+        <Signin></Signin>
+      </Popover>
         </div>
       </header>
 
