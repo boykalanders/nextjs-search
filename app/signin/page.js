@@ -11,14 +11,15 @@ import { supabase } from '../client';
 const Signin = () => {
   const router = useRouter();
   const [error, setError] = useState("");
+  
   // const session = useSession();
-//   const { data: session, status: sessionStatus } = useSession();
+  //   const { data: session, status: sessionStatus } = useSession();
 
-//   useEffect(() => {
-//     if (sessionStatus === "authenticated") {
-//       router.replace("/dashboard");
-//     }
-//   }, [sessionStatus, router]);
+  //   useEffect(() => {
+  //     if (sessionStatus === "authenticated") {
+  //       router.replace("/dashboard");
+  //     }
+  //   }, [sessionStatus, router]);
 
   const isValidEmail = (email) => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -42,22 +43,19 @@ const Signin = () => {
         return;
       }
       
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signIn({
         email: email,
         password: password,
       });
-      // if (error) throw error;
-      // console.log(data);
-      // localStorage.setItem('token', JSON.stringify(data));
+
+      if (error) throw error;
+      localStorage.setItem('token', JSON.stringify(data));
       router.push('/');
     } catch (error) {
       alert(error);
     }
   };
 
-//   if (sessionStatus === "loading") {
-//     return <h1>Loading...</h1>;
-//   }
   return (
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">
         <div className="flex justify-center flex-col items-center">
@@ -140,6 +138,12 @@ const Signin = () => {
                   className="flex w-full border border-black justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-white transition-colors hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
                 >
                   Sign in
+                </button>
+                <button
+                  type="signup"
+                  className="flex w-full border border-green justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-blue transition-colors hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 mt-10"
+                >
+                  Sign up
                 </button>
               </div>
             </form>
