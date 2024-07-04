@@ -1,6 +1,6 @@
 .sidebar {
     width: 150px; /* Adjust the width as needed */
-    height: 100vh; /* Full height */
+    height: 71vh; /* Full height */
     display: flex;
     flex-direction: column; /* Items vertically aligned */
     padding: 10px; /* Padding around the items */

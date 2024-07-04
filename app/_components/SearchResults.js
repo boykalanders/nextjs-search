@@ -1,27 +1,19 @@
-import React from 'react'
-import PaginationButtons from './PaginationButtons'
+import PaginationButtons from "./PaginationButtons";
+import ResultItem from "./ResultItem";
 
 function SearchResults({ results }) {
-    return (
-        <div className="mx-auto w-full px-3 sm:pl-[5%] md:pl-[14%] lg:pl-52">
-            {results?.map((result, index) => (
-                <div key={index} className="max-w-xl mb-8">
-                    <div className="group">
-                        <a href={result.link} className="text-sml">
-                            {result.formattedUrl}
-                        </a>
-
-                        <a href={result.link}>
-                            <h2 className="truncate text-xl text-blue-800 font-medium group-hover:underline">{result.title}</h2>
-                        </a>
-                    </div>
-                    <p className="line-clamp-2">{result.snippet}</p>
-                </div>
-            ))}
-            
-            <PaginationButtons />
-        </div>
-    )
+  return (
+    <>
+      <div className="position-relative mx-auto w-full px-3 sm:pl-[2%] md:pl-[3%] lg:pl-10">
+        {results?.map((result, index) => (
+          <ResultItem result={result} key={index} />
+        ))}
+      </div>
+      <div className="mt-auto">
+        <PaginationButtons />
+      </div>
+    </>
+  );
 }
 
-export default SearchResults
+export default SearchResults;
