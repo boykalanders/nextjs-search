@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import toast from "react-hot-toast";
-import { supabase } from '../client';
+import { supabase } from "../_lib/supabaseClient";
 
 const Signup = ({ onSignChange }) => {
   const [error, setError] = useState("");
@@ -86,6 +86,7 @@ const Signup = ({ onSignChange }) => {
         email,
         password
       );
+      router.push('signin');
     }
   };
 
@@ -188,7 +189,7 @@ const Signup = ({ onSignChange }) => {
               </button>
               <button
                 type="signup"
-                className="flex w-full border border-green justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-blue transition-colors hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 mt-10"
+                className="flex w-full border border-green justify-center rounded-md bg-white px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-blue transition-colors hover:text-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 mt-5"
                 onClick={handleSignin}
               >
                 Sign in
