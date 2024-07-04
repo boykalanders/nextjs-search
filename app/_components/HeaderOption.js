@@ -1,5 +1,4 @@
-import React , { useState }from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+
 import { useRouter } from 'next/navigation';
 import styles from './HeaderOptions.module.css';
 function HeaderOption({ Icon, title, selected, term }) {
@@ -18,13 +17,15 @@ function HeaderOption({ Icon, title, selected, term }) {
         }
         else if(e=="News"){
             router.push(`/search?term=${term}&type=news&page=0`)
+        } else {
+            router.push(`/search?term=${term}&type=others&page=0`)
         }
     }
 
     return (
         <div className={styles.item} onClick={() => handleSubmit(title)}>
-            <Icon className="hidden sm:inline-flex h-4 mr-2" />
-            <p className="hidden sm:inline-flex">{title}</p>
+            <Icon className="sm:inline-flex h-4 mr-2" />
+            <p className="sm:inline-flex">{title}</p>
         </div>
     )
 }

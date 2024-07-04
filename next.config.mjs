@@ -10,6 +10,14 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'dlms.internetmultimediaonline.org'
             },
+            {
+                protocol: 'https',
+                hostname: '**'
+            },
+            {
+                protocol: 'https',
+                hostname: 'downloadly.ir'
+            },
         ],
     },
 };
