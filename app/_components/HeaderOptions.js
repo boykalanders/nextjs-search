@@ -1,27 +1,24 @@
 import { DotsVerticalIcon, MapIcon, NewspaperIcon, PhotographIcon, PlayIcon, SearchIcon } from '@heroicons/react/outline'
-import React from 'react'
+import styles from './HeaderOptions.module.css';
 
 import HeaderOption from './HeaderOption'
 
-function HeaderOptions() {
+function HeaderOptions({term}) {
     return (
-        <div className="flex w-full text-gray-700 justify-evenly text-sm lg:text-base lg:justify-start lg:space-x-36 lg:pl-52 border-b ">
+        <sidebar className={styles.sidebar}>
             {/* Left */}
-            <div className="flex space-x-6">
-                <HeaderOption Icon={SearchIcon} title="All" />
-                <HeaderOption Icon={PhotographIcon} title="Images" />
-                <HeaderOption Icon={PlayIcon} title="Videos" />
-                <HeaderOption Icon={NewspaperIcon} title="News" />
-                <HeaderOption Icon={MapIcon} title="Maps" />
+                <HeaderOption Icon={SearchIcon} title="All" term={term} />
+                <HeaderOption Icon={PhotographIcon} title="Images" term={term} />
+                <HeaderOption Icon={PlayIcon} title="Videos" term={term} />
+                <HeaderOption Icon={NewspaperIcon} title="News" term={term} />
                 <HeaderOption Icon={DotsVerticalIcon} title="More" />
-            </div>
 
             {/* Right */}
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
                 <p className="link">Settings</p>
                 <p className="link">Tools</p>
-            </div>
-        </div>
+            </div> */}
+        </sidebar>
     )
 }
 

@@ -1,40 +1,37 @@
-import React from 'react'
-import { useRef } from 'react'
+"use client"
+import { useCallback, useContext, useState } from 'react'
 
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { XIcon } from '@heroicons/react/outline'
 import { SearchIcon, MicrophoneIcon } from '@heroicons/react/solid'
 
 import HeaderOptions from './HeaderOptions'
 
-function Header(searchtype) {
-    const router = useRouter()
-    const searchInputRef = useRef(null)
-    const searchTypeRef = useRef(null)
-
-    const search = (pathname) => {
-        const term = searchInputRef.current.value
-        
-        if (!term) return
-        
-        router.push(`/${pathname}?term=${term}`)
-    }
+function Header() {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const term = searchParams.get('term');
+    const type = searchParams.get('type') || 'all';
+    const page = searchParams.get('page') || 0;
+    const [queryTerm, setQueryTerm] = useState(term);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const { pathname } = router;
-        search(pathname);
-    };
-
+        router.push(`/search?term=${queryTerm}&type=${type}&page=${page}`);
+    }
+    const handleChange = (e) => {
+        setQueryTerm(e.target.value)
+    }
+    
     return (
         <header className="sticky top-0 bg-white">
-            <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
-            </link>
+            {/* <link href="https://fonts.googleapis.com/css2?family=Berkshire+Swash&display=swap" rel="stylesheet">
+            </link> */}
             <div className="flex w-full p-6 items-center">
                 <Image
-                    src="https://www.google.com/logos/doodles/2022/oskar-salas-112th-birthday-6753651837108454.2-s.png"
+                    src="https://dlms.internetmultimediaonline.org/lwappstore/1679922323.png"
                     alt="google doodle"
                     height={40}
                     width={120}
@@ -42,12 +39,11 @@ function Header(searchtype) {
                     className="cursor-pointer"
                 />
                 <form className="flex flex-grow px-6 py-3 ml-10 mr-5 border border-gray-200 rounded-full shadow-lg max-w-3xl items-center" onSubmit={handleSubmit}>
-                    <input ref={searchInputRef} className="flex-grow w-full focus:outline-none" type="text" defaultValue={router.query.term} />
-                    <input ref={searchTypeRef} className="hidden flex-grow w-full focus:outline-none" type="text" defaultValue={searchtype} />
+                    <input className="flex-grow w-full focus:outline-none" name="term" type="text" value={queryTerm} onChange={handleChange} />
                     <XIcon
                         className="h-7 sm:mr-3 text-gray-500 cursor-pointer transition duration-100 transform hover:scale-125"
                         onClick={() => {
-                            searchInputRef.current.value = ''
+                            setQueryTerm('')
                         }}
                     />
                     <MicrophoneIcon className="mr-3 h-6 hidden sm:inline-flex text-blue-500 border-l-2 pl-4 border-gray-300" />
@@ -66,7 +62,7 @@ function Header(searchtype) {
             </div>
 
             {/* Header Options */}
-            <HeaderOptions />
+            <HeaderOptions term={queryTerm} />
         </header>
     )
 }

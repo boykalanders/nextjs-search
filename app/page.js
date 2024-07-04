@@ -8,20 +8,21 @@ import { useRef } from "react";
 import Popover from '@mui/material/Popover';
 import Signin from './signin/page';
 import Signup from './signup/page';
+import { useMemo, useState } from "react";
 
 export default function Home() {
   const router = useRouter()
-  const searchInputRef = useRef(null)
   const [anchorEl, setAnchorEl] = React.useState(null)
   const [sign, setSign] = React.useState(false)
-  console.log(sign);
-  const search = (e) => {
+  const [ query, setQuery ] = useState({
+    term: '',
+    type: 'all'
+  });
+  const page = 0
+
+  const handleSubmit = (e) => {
       e.preventDefault()
-      const term = searchInputRef.current.value
-
-      if (!term) return
-
-      router.push(`/search?term=${term}`)
+      router.push(`/search?term=${query.term}&type=${query.type}&page=${page}`);
   }
 
   const handlePopupClick = (event) => {
@@ -37,6 +38,13 @@ export default function Home() {
   }
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+  
+  const handleChange = (e) => {
+    setQuery((prevQuery) => ({
+      ...prevQuery,
+      term: e.target.value
+    }))
+  }
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -85,7 +93,7 @@ export default function Home() {
       </header>
 
       {/* Body */}
-      <form className="flex flex-col items-center mt-44 flex-grow w-4/5" onSubmit={search}>
+      <form className="flex flex-col items-center mt-44 flex-grow w-4/5" onSubmit={handleSubmit}>
         <div>
           <div className="float-left">
             <Image className="flex space-x-4" src="/360nav.png" alt="google doodle" height={500} width={100} />
@@ -96,7 +104,7 @@ export default function Home() {
 
         <div className="flex w-full mt-5 hover:shadow-lg focus-within:shadow-lg max-w-md rounded-full border border-gray-200 px-5 py-3 items-center sm:max-w-xl lg:max-w-2xl">
           <SearchIcon className="h-5 mr-3 text-gray-500" />
-          <input ref={searchInputRef} type="text" className="flex-grow focus:outline-none " />
+          <input type="text" value={query.term} className="flex-grow focus:outline-none " onChange={handleChange} /> 
           <MicrophoneIcon className="h-5" />
         </div>
       </form>
