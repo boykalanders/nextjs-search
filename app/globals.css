@@ -15,3 +15,9 @@ img {
     width: auto;
     height: auto;
 }
+
+.active {
+    border-bottom: 2px solid rgb(0, 119, 255);
+    color: rgb(0, 119, 255);
+    font-weight: 300;
+}

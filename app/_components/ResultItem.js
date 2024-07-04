@@ -1,19 +1,20 @@
 import Image from "next/image";
 
 const ResultItem = ({ result, index }) => {
-
   const renderSwitch = (result, index) => {
     switch (result.type) {
       case "image":
         return (
           <div key={index} className=" flex max-w-xl mb-8">
-            <Image
-              src={result.preview_url}
-              width={120}
-              height={120}
-              className="rounded-lg"
-              alt={result.title}
-            />
+            <a href={result.url}>
+              <Image
+                src={result.preview_url}
+                width={120}
+                height={120}
+                className="rounded-lg"
+                alt={result.title}
+              />
+            </a>
             <div className="ml-5">
               <div className="group">
                 <a href={result.url}>
