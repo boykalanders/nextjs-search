@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 const ResultItem = ({ result, index }) => {
-  console.log(result);
+
   const renderSwitch = (result, index) => {
     switch (result.type) {
       case "image":
@@ -12,6 +12,7 @@ const ResultItem = ({ result, index }) => {
               width={120}
               height={120}
               className="rounded-lg"
+              alt={result.title}
             />
             <div className="ml-5">
               <div className="group">
