@@ -13,8 +13,8 @@ export default function Home() {
   const router = useRouter()
   const searchInputRef = useRef(null)
   const [anchorEl, setAnchorEl] = React.useState(null)
-  const [sign, setsign] = React.useState()
-
+  const [sign, setSign] = React.useState(false)
+  console.log(sign);
   const search = (e) => {
       e.preventDefault()
       const term = searchInputRef.current.value
@@ -32,6 +32,9 @@ export default function Home() {
     setAnchorEl(null);
   };
 
+  const handleSign = (incomingSign) => {
+    setSign(incomingSign);
+  }
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
 
@@ -72,7 +75,11 @@ export default function Home() {
               horizontal: 'left',
             }}
           >
-        <Signin></Signin>
+        {sign ? (
+          <Signup onSignChange={handleSign} />
+        ) : (
+          <Signin onSignChange={handleSign} />
+        )}     
       </Popover>
         </div>
       </header>
