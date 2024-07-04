@@ -1,0 +1,18 @@
+.sidebar {
+    width: 150px; /* Adjust the width as needed */
+    height: 100vh; /* Full height */
+    display: flex;
+    flex-direction: column; /* Items vertically aligned */
+    padding: 10px; /* Padding around the items */
+    border-right: 1px solid #eee;
+    cursor: pointer;
+  }
+  
+  .item {
+    margin-bottom: 10px; /* Space between items */
+    padding: 10px; /* Padding inside each item */
+    background-color: #fff; /* Item background color */
+    border-radius: 4px; /* Rounded corners */
+    text-align: right; /* Center text */
+  }
+  

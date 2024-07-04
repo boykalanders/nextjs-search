@@ -1,37 +1,29 @@
 import React , { useState }from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
+import styles from './HeaderOptions.module.css';
+function HeaderOption({ Icon, title, selected, term }) {
 
-function HeaderOption({ Icon, title, selected }) {
-
-    const searchParams = useSearchParams();
     const router = useRouter();
-    const search = searchParams.get('term');
-    const [term, setTerm] = useState(search || "")
     
     const handleSubmit = (e) => {
         
-        console.log(search)
         if(e=="All"){
-            router.push(`/search?term=${term}`)
+            router.push(`/search?term=${term}&type=all&page=0`)
         }else if(e=="Images"){
-            router.push(`/image?term=${term}`)
+            router.push(`/search?term=${term}&type=image&page=0`)
         }
         else if(e=="Videos"){
-            router.push(`/video?term=${term}`)
+            router.push(`/search?term=${term}&type=video&page=0`)
         }
         else if(e=="News"){
-            router.push(`/news?term=${term}`)
+            router.push(`/search?term=${term}&type=news&page=0`)
         }
     }
 
     return (
-        <div onClick={() => handleSubmit(title)}
-            className={`flex items-center space-x-1 border-b-4 border-transparent hover:text-blue-500 hover:border-blue-500 pb-3 cursor-pointer ${
-                selected && 'text-blue-500 border-blue-500' 
-            }`} 
-        >
-            <Icon className="h-4" />
+        <div className={styles.item} onClick={() => handleSubmit(title)}>
+            <Icon className="hidden sm:inline-flex h-4 mr-2" />
             <p className="hidden sm:inline-flex">{title}</p>
         </div>
     )
