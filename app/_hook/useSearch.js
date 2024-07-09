@@ -34,13 +34,13 @@ const useSearch = (query, page) => {
     const { term, type } = query;
     const [results, setResults] = useState(useMemo(() => [], []));
 
-    useEffect(() => {
-        async function fetch() {
-            const data = await fetchData(query, page);    
-            setResults(data);
-        }
-        fetch();
-    }, [page, term, type])
+    // useEffect(() => {
+    //     async function fetch() {
+    //         const data = await fetchData(query, page);    
+    //         setResults(data);
+    //     }
+    //     fetch();
+    // }, [page, term, type])
     return results;
 }
 

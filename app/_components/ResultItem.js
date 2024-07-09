@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 const ResultItem = ({ result, index }) => {
+  console.log(result);
   const renderSwitch = (result, index) => {
     switch (result.type) {
       case "image":
@@ -24,7 +25,7 @@ const ResultItem = ({ result, index }) => {
                   <p className="text-sm text-gray-500">{result.url}</p>
                 </a>
               </div>
-              <p className="line-clamp-2">{result.metadata}</p>
+              <p className="line-clamp-2">{result.body_content}</p>
             </div>
           </div>
         );
@@ -47,7 +48,7 @@ const ResultItem = ({ result, index }) => {
                   </h2>
                 </a>
               </div>
-              <p className="line-clamp-2">{result.metadata}</p>
+              <p className="line-clamp-2">{result.body_content}</p>
             </div>
           </div>
         );
@@ -62,7 +63,7 @@ const ResultItem = ({ result, index }) => {
                 <p className="text-sm text-gray-500">{result.url}</p>
               </a>
             </div>
-            <p className="line-clamp-2">{result.metadata}</p>
+            <p className="line-clamp-2">{result.body_content}</p>
           </div>
         );
       default:
@@ -76,7 +77,7 @@ const ResultItem = ({ result, index }) => {
                 <p className="text-sm text-gray-500">{result.url}</p>
               </a>
             </div>
-            <p className="line-clamp-2">{result.metadata}</p>
+            <p className="line-clamp-2">{result.body_content}</p>
           </div>
         );
     }
