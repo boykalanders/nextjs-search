@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react"; 
 import Image from "next/image";
 import toast from "react-hot-toast";
 import { supabase } from "../_lib/supabaseClient";
@@ -10,13 +10,6 @@ import { supabase } from "../_lib/supabaseClient";
 const Signup = ({ onSignChange }) => {
   const [error, setError] = useState("");
   const router = useRouter();
-  // const { data: session, status: sessionStatus } = useSession();
-
-  // useEffect(() => {
-  //   if (sessionStatus === "authenticated") {
-  //     router.replace("/dashboard");
-  //   }
-  // }, [sessionStatus, router]);
 
   const handleSignin = () => {
     onSignChange(false)
@@ -69,7 +62,6 @@ const Signup = ({ onSignChange }) => {
       return;
     }
 
-    
     const { data, error } = await supabase.auth.signUp({
       email:email,
       password: password,
@@ -90,9 +82,6 @@ const Signup = ({ onSignChange }) => {
     }
   };
 
-  // if (sessionStatus === "loading") {
-  //   return <h1>Loading...</h1>;
-  // }
   return (
 
     <div className="flex min-h-full flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8">

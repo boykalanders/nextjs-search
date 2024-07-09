@@ -9,6 +9,7 @@ import { SearchIcon, MicrophoneIcon } from "@heroicons/react/solid";
 
 import HeaderOptions from "./HeaderOptions";
 
+
 function Header() {
   const router = useRouter();
   const searchParams = useSearchParams();

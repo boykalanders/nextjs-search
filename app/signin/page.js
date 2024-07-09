@@ -5,7 +5,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
 import Image from "next/image";
-import toast from "react-hot-toast";
+import {ToastContainer, toast} from "react-toastify";
 import { supabase } from "../_lib/supabaseClient";
 
 const Signin = ({ onSignChange }) => {
@@ -48,14 +48,17 @@ const Signin = ({ onSignChange }) => {
         return;
       }
 
-      const { data, error } = await supabase.auth.signIn({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
 
-      if (error) throw error;
-      localStorage.setItem('token', JSON.stringify(data));
-      router.push('/');
+      if (error) {
+        throw error;
+      }else {
+        localStorage.setItem('token', JSON.stringify(data));
+        router.push('/');
+      }  
     } catch (error) {
       alert(error);
     }
@@ -70,7 +73,7 @@ const Signin = ({ onSignChange }) => {
         </h2>
       </div>
 
-      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+      <div className="sm:mx-auto sm:w-full sm:max-w-[480px]">
         <div className="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
