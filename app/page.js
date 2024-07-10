@@ -79,11 +79,8 @@ if(SpeechRecognition) {
               horizontal: 'left',
             }}
           >
-        {sign ? (
-          <Signup onSignChange={handleSign} />
-        ) : (
-          <Signin onSignChange={handleSign} />
-        )}     
+        {sign && <Signup onSignChange={handleSign} />}
+        { sign ||  <Signin onSignChange={handleSign} />}       
       </Popover>
         </div>
       </header>
