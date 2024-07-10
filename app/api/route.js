@@ -7,25 +7,16 @@ export async function GET(req) {
     
     const query = await req.nextUrl.searchParams;
     const term = await query.get("term");
-    const type = await query.get("type");
     const page = await query.get("page");
     const { body } = await client.search({
       index: "search-search-priorurls",
-
       from: page,
       size: 20,
       body: {
-        size: 20,
         query: {
-          bool: {
-            filter: [
-              // {
-              //   term: { type: type=="all" ? '%' : type },
-              // },
-              {
-                match: { title: `%${term}%` },
-              }
-            ],
+          match : {
+            title: `%${term}%`,
+            // content: `%${term}%`
           },
         },
       },

@@ -18,6 +18,18 @@ const nextConfig = {
                 protocol: 'https',
                 hostname: 'downloadly.ir'
             },
+            {
+                protocol: 'https',
+                hostname: 'www.lxp.tv'
+            },
+            {
+                protocol: 'http',
+                hostname: 'cloveworld.org'
+            },
+            {
+                protocol: 'http',
+                hostname: 'christembassy.org'
+            },
         ],
     },
 };
