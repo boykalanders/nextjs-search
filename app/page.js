@@ -20,12 +20,25 @@ export default function Home() {
   })
   const [page, setPage] = React.useState(0)
 
-// The speech recognition interface lives on the browser’s window object
-const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-if(SpeechRecognition) {
-  console.log("Your Browser supports speech Recognition");  
-  const recognition = new SpeechRecognition();
-  recognition.continuous = true;
+  const { transcript, listening, resetTranscript } = useSpeechRecognition()
+  const [isSearching, setIsSearching] = React.useState(false)
+
+  // if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+  //   return <div>Your browser does not support speech recognition.</div>;
+  // }
+
+  const handleStart = () => {
+    setIsSearching(true);
+    SpeechRecognition.startListening({ continuous: false });
+  };
+
+  const handleStop = () => {
+    setIsSearching(false);
+    SpeechRecognition.stopListening();
+    onSearch(transcript);
+    resetTranscript();
+  };
+  
   
   const handleSubmit = (e) => {
       e.preventDefault()
@@ -79,8 +92,11 @@ if(SpeechRecognition) {
               horizontal: 'left',
             }}
           >
-        {sign && <Signup onSignChange={handleSign} />}
-        { sign ||  <Signin onSignChange={handleSign} />}       
+        {sign ? (
+          <Signup onSignChange={handleSign} />
+        ) : (
+          <Signin onSignChange={handleSign} />
+        )}     
       </Popover>
         </div>
       </header>
@@ -102,8 +118,7 @@ if(SpeechRecognition) {
           <SearchIcon className="ml-2 h-6 text-blue-500 hidden sm:inline-flex  " />
           
         </div>
-        <p>Transcript: {transcript}</p>
       </form>
     </main>
   );
-}}
+}
