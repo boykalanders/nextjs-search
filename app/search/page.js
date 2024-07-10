@@ -5,7 +5,7 @@ import SearchResults from "../_components/SearchResults";
 import { useSearchParams } from "next/navigation";
 import useSearch from "../_hook/useSearch";
 import HeaderOptions from "../_components/HeaderOptions";
-import { Client } from "../_lib/elasticsearch";
+// import { Client } from "../_lib/elasticsearch";
 
 async function Page(){
     const searchParams = useSearchParams();

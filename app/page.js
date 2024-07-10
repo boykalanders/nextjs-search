@@ -7,7 +7,8 @@ import { useRouter } from "next/navigation";
 import Popover from '@mui/material/Popover';
 import Signin from './signin/page';
 import Signup from './signup/page';
-import { useMemo, useState } from "react";
+import { useEffect } from 'react';
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 
 export default function Home() {
   const router = useRouter()
@@ -16,16 +17,23 @@ export default function Home() {
   const [ query, setQuery ] = React.useState({
     term: '',
     type: 'all'
-  });
+  })
   const [page, setPage] = React.useState(0)
 
+// The speech recognition interface lives on the browser’s window object
+const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+if(SpeechRecognition) {
+  console.log("Your Browser supports speech Recognition");  
+  const recognition = new SpeechRecognition();
+  recognition.continuous = true;
+  
   const handleSubmit = (e) => {
       e.preventDefault()
-      router.push(`/search?term=${query.term}&type=${query.type}&page=${page}`);
+      router.push(`/search?term=${query.term}&type=${query.type}&page=${page}`)
   }
 
   const handlePopupClick = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget)
   };
 
   const handleClose = () => {
@@ -90,11 +98,15 @@ export default function Home() {
         </div>
         <div className="flex w-full mt-5 hover:shadow-lg focus-within:shadow-lg max-w-md rounded-full border border-gray-200 px-5 py-3 items-center sm:max-w-xl lg:max-w-2xl">
           <input type="text" value={query.term} className="flex-grow focus:outline-none " onChange={handleChange} /> 
-          <MicrophoneIcon className="mr-1 h-6 hidden sm:inline-flex text-blue-500 pl-1 border-gray-300 border-l-2" />
-          <CameraIcon className="mr-1 h-6 hidden sm:inline-flex text-blue-500 pl-1 border-gray-300" />
+          <MicrophoneIcon onClick={handleStart} disabled={isSearching} className="mr-1 h-6 hidden sm:inline-flex text-blue-500 pl-1 border-gray-300 border-l-2" />
+          {listening ? 'Listening...' : 'Start Voice Search'}
+          
+          {/* <CameraIcon className="mr-1 h-6 hidden sm:inline-flex text-blue-500 pl-1 border-gray-300" /> */}
           <SearchIcon className="ml-2 h-6 text-blue-500 hidden sm:inline-flex  " />
+          
         </div>
+        <p>Transcript: {transcript}</p>
       </form>
     </main>
   );
-}
+}}
