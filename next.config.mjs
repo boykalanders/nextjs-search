@@ -8,7 +8,7 @@ const nextConfig = {
             },
             {
                 protocol: 'https',
-                hostname: 'dlms.internetmultimediaonline.org'
+                hostname: 'traumacareinternational.org/'
             },
             {
                 protocol: 'https',
@@ -21,10 +21,6 @@ const nextConfig = {
             {
                 protocol: 'https',
                 hostname: 'www.lxp.tv'
-            },
-            {
-                protocol: 'http',
-                hostname: 'cloveworld.org'
             },
             {
                 protocol: 'http',

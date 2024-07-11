@@ -11,9 +11,9 @@ let images = [
   {
     _source: {
       preview_url:
-        "http://cloveworld.org/mobile/admin/program_videos/art/666835bc1c5967yhrb2e938cw1718105532.jpg",
+        "https://traumacareinternational.org/images/programs/630128-citermain.jpg",
       title:
-        "DfT says rail benefits to come 10 years early amid fury over cuts to HS2 scheme - Loveworld UK",
+        "Campaign For Improved Trauma And Emergency Response",
       type: "image",
     },
   },
@@ -29,8 +29,8 @@ let images = [
   {
     _source: {
       preview_url:
-        "http://cloveworld.org/mobile/admin/program_videos/art/65d614821568b2finxq1dbl9z1708528770.jpg",
-      title: "Lifestyle Archives - Loveworld XP",
+        "https://www.lxp.tv/wp-content/uploads/2020/03/Adams-Oshiomhole-1.jpg",
+      title: "APC will bounce back stronger, says Oshiomhole",
       type: "image",
     },
   },
@@ -45,8 +45,8 @@ let images = [
   {
     _source: {
       preview_url:
-        "http://cloveworld.org/mobile/admin/program_videos/art/65d6086e2130e935dmh2iypqf1708525678.jpg",
-      title: "Entertaining Archives - Loveworld XP",
+        "https://www.lxp.tv/wp-content/uploads/2019/04/tmbook.png",
+      title: "World Loveworld Day",
       type: "image",
     },
   },
